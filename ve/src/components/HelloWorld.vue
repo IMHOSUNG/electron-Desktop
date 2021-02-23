@@ -1,153 +1,99 @@
 <template>
-  <v-container>
-    <v-row class="text-center">
-      <v-col cols="12">
-        <v-img
-          :src="require('../assets/logo.svg')"
-          class="my-3"
-          contain
-          height="200"
-        />
-      </v-col>
-
-      <v-col class="mb-4">
-        <h1 class="display-2 font-weight-bold mb-3">
-          Welcome to Vuetify
-        </h1>
-
-        <p class="subheading font-weight-regular">
-          For help and collaboration with other Vuetify developers,
-          <br>please join our online
-          <a
-            href="https://community.vuetifyjs.com"
-            target="_blank"
-          >Discord Community</a>
-        </p>
-      </v-col>
-
-      <v-col
-        class="mb-5"
-        cols="12"
+  <v-app id="inspire">
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+      <v-sheet
+        color="grey lighten-4"
+        class="pa-4"
       >
-        <h2 class="headline font-weight-bold mb-3">
-          What's next?
-        </h2>
+        <v-avatar
+          class="mb-4"
+          color="grey darken-1"
+          size="64"
+        ></v-avatar>
 
-        <v-row justify="center">
-          <a
-            v-for="(next, i) in whatsNext"
-            :key="i"
-            :href="next.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ next.text }}
-          </a>
-        </v-row>
-      </v-col>
+        <div>dlaghtjd4487@naver.com</div>
+      </v-sheet>
 
-      <v-col
-        class="mb-5"
-        cols="12"
+      <v-divider></v-divider>
+
+      <v-list>
+        <v-list-item
+          v-for="[icon, text] in links"
+          :key="icon"
+          link
+        >
+          <v-list-item-icon>
+            <v-icon>{{ icon }}</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>{{ text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-main>
+      <v-container
+        class="py-8 px-6"
+        fluid
       >
-        <h2 class="headline font-weight-bold mb-3">
-          Important Links
-        </h2>
-
-        <v-row justify="center">
-          <a
-            v-for="(link, i) in importantLinks"
-            :key="i"
-            :href="link.href"
-            class="subheading mx-3"
-            target="_blank"
+        <v-row>
+          <v-col
+            v-for="card in cards"
+            :key="card"
+            cols="12"
           >
-            {{ link.text }}
-          </a>
-        </v-row>
-      </v-col>
+            <v-card>
+              <v-subheader>{{ card }}</v-subheader>
 
-      <v-col
-        class="mb-5"
-        cols="12"
-      >
-        <h2 class="headline font-weight-bold mb-3">
-          Ecosystem
-        </h2>
+              <v-list two-line>
+                <template v-for="n in 6">
+                  <v-list-item
 
-        <v-row justify="center">
-          <a
-            v-for="(eco, i) in ecosystem"
-            :key="i"
-            :href="eco.href"
-            class="subheading mx-3"
-            target="_blank"
-          >
-            {{ eco.text }}
-          </a>
+                    :key="n"
+                  >
+                    <v-list-item-avatar color="grey darken-1">
+                    </v-list-item-avatar>
+
+                    <v-list-item-content>
+                      <v-list-item-title>Message {{ n }}</v-list-item-title>
+
+                      <v-list-item-subtitle>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus distinctio similique
+                      </v-list-item-subtitle>
+                    </v-list-item-content>
+                  </v-list-item>
+
+                  <v-divider
+                    v-if="n !== 6"
+                    :key="`divider-${n}`"
+                    inset
+                  ></v-divider>
+                </template>
+              </v-list>
+            </v-card>
+          </v-col>
         </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
-<script lang="ts">
-import Vue from 'vue';
-
-export default Vue.extend({
-  name: 'HelloWorld',
-
-  data: () => ({
-    ecosystem: [
-      {
-        text: 'vuetify-loader',
-        href: 'https://github.com/vuetifyjs/vuetify-loader',
-      },
-      {
-        text: 'github',
-        href: 'https://github.com/vuetifyjs/vuetify',
-      },
-      {
-        text: 'awesome-vuetify',
-        href: 'https://github.com/vuetifyjs/awesome-vuetify',
-      },
-    ],
-    importantLinks: [
-      {
-        text: 'Documentation',
-        href: 'https://vuetifyjs.com',
-      },
-      {
-        text: 'Chat',
-        href: 'https://community.vuetifyjs.com',
-      },
-      {
-        text: 'Made with Vuetify',
-        href: 'https://madewithvuejs.com/vuetify',
-      },
-      {
-        text: 'Twitter',
-        href: 'https://twitter.com/vuetifyjs',
-      },
-      {
-        text: 'Articles',
-        href: 'https://medium.com/vuetify',
-      },
-    ],
-    whatsNext: [
-      {
-        text: 'Explore components',
-        href: 'https://vuetifyjs.com/components/api-explorer',
-      },
-      {
-        text: 'Select a layout',
-        href: 'https://vuetifyjs.com/getting-started/pre-made-layouts',
-      },
-      {
-        text: 'Frequently Asked Questions',
-        href: 'https://vuetifyjs.com/getting-started/frequently-asked-questions',
-      },
-    ],
-  }),
-});
+<script>
+  export default {
+    data: () => ({
+      cards: ['Today', 'Yesterday'],
+      drawer: null,
+      links: [
+        ['mdi-inbox-arrow-down', 'Inbox'],
+        ['mdi-send', 'Send'],
+        ['mdi-delete', 'Trash'],
+        ['mdi-alert-octagon', 'Spam'],
+      ],
+    }),
+  }
 </script>
