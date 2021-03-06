@@ -24,7 +24,6 @@
           width="100"
         />
       </div>
-
       <v-spacer></v-spacer>
 
       <v-btn
@@ -36,26 +35,71 @@
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>
+        <v-navigation-drawer
+      v-model="drawer"
+      app
+    >
+      <v-sheet
+        color="grey lighten-4"
+        class="pa-4"
+      >
+        <v-avatar
+          class="mb-4"
+          color="grey darken-1"
+          size="64"
+        ></v-avatar>
 
-    <v-main>
-      <HelloWorld/>
-    </v-main>
+        <div>dlaghtjd4487@naver.com</div>
+      </v-sheet>
+
+      <v-divider></v-divider>
+
+      <v-list>
+        <router-link to='/about' >
+        <v-list-item
+          v-for="[icon, text, path] in links"
+          :key="icon"
+          :to="path"
+          link
+          append="true"
+        >
+            <v-list-item-icon>
+              <v-icon>{{ icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ text }}</v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+        </router-link>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <router-view />
+      </v-container>
+    </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
 
 export default Vue.extend({
   name: 'App',
 
   components: {
-    HelloWorld,
   },
 
   data: () => ({
-    //
+    drawer: null,
+    links: [
+      ['mdi-inbox-arrow-down', 'Inbox', '/'],
+      ['mdi-send', 'Send', '/about'],
+      ['mdi-delete', 'Trash', '/'],
+      ['mdi-alert-octagon', 'Spam', '/about'],
+    ],
   }),
 });
 </script>
